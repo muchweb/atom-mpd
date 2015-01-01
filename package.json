@@ -1,0 +1,16 @@
+{
+  "name": "mpd",
+  "main": "./lib/mpd",
+  "version": "0.0.0",
+  "description": "MPD client for Atom",
+  "activationCommands": {
+    "atom-workspace": "mpd:toggle"
+  },
+  "repository": "https://github.com/atom/mpd",
+  "license": "GPL-3.0+",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
