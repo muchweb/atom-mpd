@@ -2,10 +2,61 @@
 //
 // See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
 // for a full listing of what's available.
-@import "ui-variables";
+@import 'ui-variables';
+
+/*
+@-webkit-keyframes scroll {
+	from {
+		left: 100%;
+	}
+	to {
+		left: -100%;
+	}
+}
+*/
 
 .mpd {
+	@width-total: 100px;
+
+	position: relative;
 	display: inline-block;
 	box-shadow: 0 0 4px 0 black inset;
-	padding: 0 10px;
+	width: @width-total;
+	height: 20px;
+	content: 'aasd';
+
+	& > .status {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 16px;
+		height: 100%;
+		background: red;
+	}
+
+	& > .title {
+		width: @width-total - 16px - 16px;
+		position: absolute;
+		left: 16px;
+		right: 16px;
+		top: 0px;
+		height: 100%;
+		background: green;
+	}
+
+	& > .volume {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		width: 16px;
+		height: 100%;
+		background: red;
+	}
+
+
+	& > span {
+		position: absolute;
+		top: 0%;
+		-webkit-animation: scroll 5s linear infinite;
+	}
 }

@@ -22,6 +22,7 @@ module.exports =
 						when 'songid'
 							@songid = parseInt broken[1], 10
 						when 'state'
+							console.log broken[1]
 							@status = switch broken[1]
 								when 'play'  then '▶'
 								when 'stop'  then '■'
@@ -47,7 +48,9 @@ module.exports =
 				@statusChanged()
 
 	statusChanged: () ->
-		@mpdView.title.textContent = "#{@status} #{@songtitle} (#{@volume}%)"
+		@mpdView.status.textContent = "#{@status}"
+		@mpdView.title.textContent  = "#{@songtitle}"
+		@mpdView.volume.textContent = "#{@volume}"
 
 	activate: (state) ->
 		@mpdView = new MpdView(state.mpdViewState)
