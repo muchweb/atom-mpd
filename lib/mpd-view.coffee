@@ -20,8 +20,6 @@ module.exports = class MpdView
 
 	# Toggle the visibility of this view
 	toggle: ->
-		console.log 'MpdView was toggled!'
-
 		if @element.parentElement?
 			@element.remove()
 		else
