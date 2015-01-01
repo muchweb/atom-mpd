@@ -1,14 +1,12 @@
 module.exports = class MpdView
 	constructor: (serializeState) ->
-		# Create root element
 		@element = document.createElement('div')
 		@element.classList.add('mpd')
 
-		# Create message element
-		message = document.createElement('span')
-		message.textContent = "The Mpd package is Alive! It's ALIVE!"
-		message.classList.add('message')
-		@element.appendChild(message)
+		@title = document.createElement('span')
+		@title.textContent = "The Mpd package is Alive! It's ALIVE!"
+		@title.classList.add('title')
+		@element.appendChild(@title)
 
 		# Register command that toggles this view
 		atom.commands.add 'atom-workspace', 'mpd:toggle': => @toggle()

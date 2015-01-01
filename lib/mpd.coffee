@@ -1,13 +1,29 @@
 MpdView = require './mpd-view'
+mpd	 = require 'mpd'
+{cmd}   = mpd
 
 module.exports =
-  mpdView: null
+	mpdView: null
 
-  activate: (state) ->
-    @mpdView = new MpdView(state.mpdViewState)
+	activate: (state) ->
+		@mpdView = new MpdView(state.mpdViewState)
+		@client = mpd.connect
+			port: 6600
+			host: 'localhost'
 
-  deactivate: ->
-    @mpdView.destroy()
+		@client.on 'ready', (name) ->
+			console.log "ready"
 
-  serialize: ->
-    mpdViewState: @mpdView.serialize()
+		@client.on 'system', (name) ->
+			console.log 'update', name
+
+		@client.on 'system-player', =>
+			@client.sendCommand (cmd 'status', []), (err, msg) ->
+				throw err if err?
+				console.log msg
+
+	deactivate: ->
+		@mpdView.destroy()
+
+	serialize: ->
+		mpdViewState: @mpdView.serialize()
