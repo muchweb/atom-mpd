@@ -22,12 +22,15 @@ module.exports =
 						when 'songid'
 							@songid = parseInt broken[1], 10
 						when 'state'
-							console.log broken[1]
-							@status = switch broken[1]
-								when 'play'  then '▶'
-								when 'stop'  then '■'
-								when 'pause' then '▐▐'
-								else '?'
+							switch broken[1].trim()
+								when 'play'
+									@status = '▶'
+								when 'stop'
+									@status = '■'
+								when 'pause'
+									@status = '▐▐'
+								else
+									@status = '?'
 						when 'volume'
 							@volume = parseInt broken[1], 10
 
@@ -44,7 +47,6 @@ module.exports =
 						return if items[2]? then items[2] else '?'
 
 				@songtitle = items.pop() if items.length >= 1
-				@mpdView.title.textContent = "#{@status} #{@songtitle} (#{@volume}%)"
 				@statusChanged()
 
 	statusChanged: () ->
@@ -59,8 +61,10 @@ module.exports =
 			host: 'localhost'
 
 		@client.on 'ready', (name) => @requestStatus()
-		@client.on 'system', (name) => @mpdView.title.textContent = "update #{name}"
-		@client.on 'system-player', => @requestStatus()
+		@client.on 'system', (name) => @requestStatus()
+		#@client.on 'system', (name) => @mpdView.title.textContent = "update #{name}"
+		#@client.on 'system-player', => @requestStatus()
+		#@client.on 'system-mixer', => @requestStatus()
 
 	deactivate: ->
 		@mpdView.destroy()

@@ -3,15 +3,15 @@ module.exports = class MpdView
 		@element = document.createElement 'div'
 		@element.classList.add 'mpd'
 
-		@status = document.createElement 'span'
-		@status.textContent = '...'
-		@status.classList.add 'status'
-		@element.appendChild(@status)
-
 		@title = document.createElement 'marquee'
 		@title.textContent = '...'
 		@title.classList.add 'title'
 		@element.appendChild(@title)
+
+		@status = document.createElement 'span'
+		@status.textContent = '...'
+		@status.classList.add 'status'
+		@element.appendChild(@status)
 
 		@volume = document.createElement 'span'
 		@volume.textContent = '...'
@@ -34,4 +34,4 @@ module.exports = class MpdView
 		if @element.parentElement?
 			@element.remove()
 		else
-			atom.workspaceView.statusBar.appendLeft @element
+			atom.workspaceView.statusBar.appendRight @element
