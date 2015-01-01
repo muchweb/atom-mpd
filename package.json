@@ -1,7 +1,7 @@
 {
   "name": "mpd",
   "main": "./lib/mpd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MPD client for Atom",
   "activationCommands": {
     "atom-workspace": "mpd:toggle"
