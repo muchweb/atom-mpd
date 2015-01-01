@@ -6,7 +6,7 @@
   "activationCommands": {
     "atom-workspace": "mpd:toggle"
   },
-  "repository": "https://github.com/atom/mpd",
+  "repository": "https://github.com/muchweb/atom-mpd",
   "license": "GPL-3.0+",
   "engines": {
     "atom": ">0.50.0"
