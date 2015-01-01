@@ -16,7 +16,7 @@
 */
 
 .mpd {
-	@width-total: 100px;
+	@width-total:     200px;
 
 	position: relative;
 	display: inline-block;
@@ -24,33 +24,41 @@
 	width: @width-total;
 	height: 20px;
 	content: 'aasd';
+	vertical-align: top;
 
-	& > .status {
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		width: 16px;
-		height: 100%;
-		background: red;
-	}
+
 
 	& > .title {
-		width: @width-total - 16px - 16px;
+		width: @width-total;
 		position: absolute;
-		left: 16px;
-		right: 16px;
+		left: 0;
+		right: 0;
 		top: 0px;
 		height: 100%;
-		background: green;
+		background: @tool-panel-background-color;
 	}
 
+	& > .status,
 	& > .volume {
 		position: absolute;
-		right: 0px;
+		display: inline-block;
 		top: 0px;
-		width: 16px;
 		height: 100%;
-		background: red;
+		background: @base-background-color;
+		box-shadow: 0 0 4px 0 black;
+		text-align: center;
+		padding: 0 4px;
+
+		&.volume {
+			right: 0px;
+			&:after {
+				content: '%'
+			}
+		}
+
+		&.status {
+			left: 0px;
+		}
 	}
 
 
