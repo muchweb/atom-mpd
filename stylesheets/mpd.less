@@ -16,15 +16,18 @@
 */
 
 .mpd {
-	@width-total: 200px;
+	@width-total: 160px;
 
 	position: relative;
 	display: inline-block;
-	box-shadow: 0 0 4px 0 black inset;
 	width: @width-total;
 	height: 20px;
 	vertical-align: top;
 	margin: 0 8px;
+	overflow: hidden;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	margin-top: 1px;
 
 	& > .title {
 		width: @width-total;
@@ -33,7 +36,7 @@
 		right: 0;
 		top: 0px;
 		height: 100%;
-		background: @tool-panel-background-color;
+		background: @base-background-color;
 	}
 
 	& > .status,
@@ -43,12 +46,13 @@
 		top: 0px;
 		height: 100%;
 		background: @base-background-color;
-		box-shadow: 0 0 4px 0 black;
 		text-align: center;
-		padding: 0 4px;
+
 
 		&.volume {
 			right: 0px;
+			box-shadow: -2px 0 2px 0 black, -2px 0 2px 0 black inset;
+			padding: 0 5px 0 3px;
 			&:after {
 				content: '%'
 			}
@@ -56,6 +60,8 @@
 
 		&.status {
 			left: 0px;
+			padding: 0 3px 0 5px;
+			box-shadow: 2px 0 2px 0 black, 2px 0 2px 0 black inset;
 		}
 	}
 
