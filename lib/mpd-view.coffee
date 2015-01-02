@@ -22,6 +22,8 @@ module.exports = class MpdView
 		atom.commands.add 'atom-workspace',
 			'mpd:toggle': => @toggle()
 
+		@toggle()
+
 	# Returns an object that can be retrieved when package is activated
 	serialize: ->
 
