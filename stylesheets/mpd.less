@@ -16,12 +16,13 @@
 */
 
 .mpd {
-	@width-total: 160px;
+	@width-total:  160px;
+	@height-total: 20px;
 
 	position: relative;
 	display: inline-block;
 	width: @width-total;
-	height: 20px;
+	height: @height-total;
 	vertical-align: top;
 	margin: 0 8px;
 	overflow: hidden;
@@ -45,14 +46,13 @@
 		display: inline-block;
 		top: 0px;
 		height: 100%;
-		background: @base-background-color;
 		text-align: center;
-
 
 		&.volume {
 			right: 0px;
 			box-shadow: -2px 0 2px 0 black, -2px 0 2px 0 black inset;
 			padding: 0 5px 0 3px;
+			background: @base-background-color;
 			&:after {
 				content: '%'
 			}
@@ -60,7 +60,7 @@
 
 		&.status {
 			left: 0px;
-			padding: 0 3px 0 5px;
+			// padding: 0 3px 0 5px;
 			box-shadow: 2px 0 2px 0 black, 2px 0 2px 0 black inset;
 		}
 	}

@@ -1,8 +1,11 @@
 MpdView = require './mpd-view'
+{Emitter} = require 'event-kit'
 mpd	    = require 'mpd'
 {cmd}   = mpd
 
 module.exports =
+	emitter: null
+
 	mpdView: null
 
 	status:    ''
@@ -14,7 +17,6 @@ module.exports =
 		@client.sendCommand (cmd 'status', []), (err, msg) =>
 			throw err if err?
 
-			console.log msg
 			items = msg.split '\n'
 			for item in items
 				broken = item.split ':'
@@ -56,7 +58,9 @@ module.exports =
 		@mpdView.volume.textContent = "#{@volume}"
 
 	activate: (state) ->
-		@mpdView = new MpdView(state.mpdViewState)
+		@emitter = new Emitter
+		@mpdView = new MpdView state.mpdViewState
+
 		@client = mpd.connect
 			port: 6600
 			host: 'localhost'
@@ -65,6 +69,11 @@ module.exports =
 		@client.on 'system', (name) => @mpdView.title.textContent = "update #{name}"
 		@client.on 'system-player', => @requestStatus()
 		@client.on 'system-mixer', => @requestStatus()
+		@mpdView.emitter = @emitter
+
+		@emitter.on 'trigger-status', =>
+			@client.sendCommand (cmd 'pause', []), (err, msg2) =>
+				throw err if err?
 
 	deactivate: ->
 		@mpdView.destroy()

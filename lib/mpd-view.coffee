@@ -1,4 +1,6 @@
 module.exports = class MpdView
+	emitter: null
+
 	constructor: (serializeState) ->
 		@element = document.createElement 'div'
 		@element.classList.add 'mpd'
@@ -6,23 +8,24 @@ module.exports = class MpdView
 		@title = document.createElement 'marquee'
 		@title.textContent = '...'
 		@title.classList.add 'title'
-		@element.appendChild(@title)
+		@element.appendChild @title
 
-		@status = document.createElement 'span'
+		@status = document.createElement 'button'
 		@status.textContent = '...'
+		@status.classList.add 'btn'
+		@status.classList.add 'btn-sm'
 		@status.classList.add 'status'
-		@element.appendChild(@status)
+		@status.addEventListener 'click', => @emitter.emit 'trigger-status'
+		@element.appendChild @status
 
 		@volume = document.createElement 'span'
 		@volume.textContent = '...'
 		@volume.classList.add 'volume'
-		@element.appendChild(@volume)
+		@element.appendChild @volume
 
 		# Register command that toggles this view
 		atom.commands.add 'atom-workspace',
 			'mpd:toggle': => @toggle()
-
-		@toggle()
 
 	# Returns an object that can be retrieved when package is activated
 	serialize: ->
