@@ -18,9 +18,19 @@ module.exports = class MpdView
 		@status.addEventListener 'click', => @emitter.emit 'trigger-status'
 		@element.appendChild @status
 
-		@volume = document.createElement 'span'
+		@volume = document.createElement 'button'
 		@volume.textContent = '...'
+		@volume.classList.add 'btn'
+		@volume.classList.add 'btn-sm'
 		@volume.classList.add 'volume'
+
+		@volume.addEventListener 'mousewheel', (event) =>
+			delta = Math.max -1, (Math.min 1, (event.wheelDelta || -event.detail))
+			@emitter.emit 'volume-change', delta
+
+		@volume.addEventListener 'click', =>
+			@emitter.emit 'volume-mute'
+
 		@element.appendChild @volume
 
 		# Register command that toggles this view

@@ -75,6 +75,15 @@ module.exports =
 			@client.sendCommand (cmd 'pause', []), (err, msg2) =>
 				throw err if err?
 
+		@emitter.on 'volume-change', (x) =>
+			amount = if x > 0 then "+#{Math.abs x}" else "-#{Math.abs x}"
+			@client.sendCommand (cmd 'volume', [amount]), (err, msg2) =>
+				throw err if err?
+
+		@emitter.on 'volume-mute', =>
+			@client.sendCommand (cmd 'volume', ['0']), (err, msg2) =>
+				throw err if err?
+
 	deactivate: ->
 		@mpdView.destroy()
 
