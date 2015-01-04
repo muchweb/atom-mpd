@@ -57,13 +57,23 @@ module.exports =
 		@mpdView.title.textContent  = "#{@songtitle}"
 		@mpdView.volume.textContent = "#{@volume}"
 
+	config:
+		host:
+			default: 'localhost'
+			type: 'string'
+
+		port:
+			default: 6600
+			type: 'number'
+
+
 	activate: (state) ->
 		@emitter = new Emitter
 		@mpdView = new MpdView state.mpdViewState
 
 		@client = mpd.connect
-			port: 6600
-			host: 'localhost'
+			host: atom.config.get 'mpd.host'
+			port: atom.config.get 'mpd.port'
 
 		@client.on 'ready', (name) => @requestStatus()
 		@client.on 'system', (name) => @mpdView.title.textContent = "update #{name}"
